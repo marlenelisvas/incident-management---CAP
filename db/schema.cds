@@ -1,4 +1,19 @@
+namespace sap.capire.incidents;
 
+using {
+    cuid,
+    sap.common.CodeList
+} from '@sap/cds/common';
+entity Incidents : cuid {
+    status:  Association to Status ;
+    title: String(150);
+    urgency: Association to Urgency;
+    customer: Association to Customers;
+}
+entity Customers : cuid {
+    name: String(300);
+    
+}
 entity Status : CodeList {
     key code: String enum{
         assigned= 'A';
@@ -7,11 +22,11 @@ entity Status : CodeList {
         resolved='R';
         closed = 'C';
     };
-    critical: Integer;
+    criticality: Integer;
     
 }
 
-entity Urgency : CodeList {
+entity Urgency : CodeList  {
     key code: String enum{
         high= 'H';
         medium = 'M';
@@ -19,5 +34,6 @@ entity Urgency : CodeList {
     };
     
 }
+
 type EMailAddress : String;
 type PhoneNumber : String;
